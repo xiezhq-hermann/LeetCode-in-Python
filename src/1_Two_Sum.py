@@ -11,6 +11,7 @@ class Solution:
             if j in hash_num:
                 zero = nums.index(i)
                 nums[zero] = None
+                # distinguish [1,1] and [1]
                 if j in nums:
                     one = nums.index(j)
                     return [zero, one]
