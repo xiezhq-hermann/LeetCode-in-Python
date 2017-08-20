@@ -25,6 +25,7 @@ class Solution(object):
                 res.val -= 10
             l1, l2 = l1.next, l2.next
         res.next = l1 if l1 else l2
+
         while bit:
             if res.next:
                 res.next.val += 1
@@ -39,7 +40,7 @@ class Solution(object):
                 break
         return start.next.next
 
-
+# for testing, not included in solution
 def initial(nums):
     start = ListNode(0)
     res = ListNode(nums[0])
