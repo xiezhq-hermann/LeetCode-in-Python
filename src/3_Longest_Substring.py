@@ -8,7 +8,6 @@ class Solution(object):
         index_dic = {}
         i = -1
         j = 0
-
         for i in range(len(s)):
             target = s[i]
             if target in index_dic and j<=index_dic[target]:
