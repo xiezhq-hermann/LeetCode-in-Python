@@ -14,7 +14,8 @@ class Solution(object):
         len_palin[2], len_palin[-2] = 2, 2
         center, bound = 2, 4
         for i in range(3, aug_len - 3):
-            len_palin[i] = max(min(len_palin[2 * center - i], (bound - i)), 1)
+            if bound > i:
+                len_palin[i] = min(len_palin[2 * center - i], (bound - i))
             while aug_str[i + len_palin[i]] == aug_str[i - len_palin[i]]:
                 len_palin[i] += 1
             if len_palin[i] + i >= bound:
