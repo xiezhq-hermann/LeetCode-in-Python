@@ -4,6 +4,6 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        x = str(x)
-        x = -int(x[-1:0:-1]) if x[0] == '-' else int(x[::-1])
-        return x if 2147483647 > x > -2147483648 else 0
+        sign = (x > 0) * 2 - 1
+        x = int(str(sign * x)[::-1])
+        return (x < 2147483647) * x * sign  # -8463847412 is invalid
