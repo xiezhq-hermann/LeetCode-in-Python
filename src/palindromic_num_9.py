@@ -4,9 +4,7 @@ class Solution(object):
         :type x: int
         :rtype: bool
         """
-        if x < 0 or x % 10 == 0:
-            if x == 0:
-                return True
+        if x < 0 or (x % 10 == 0 and x != 0):
             return False
         half_x = 0
         while x > half_x:
