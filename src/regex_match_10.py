@@ -7,22 +7,23 @@ class Solution(object):
         """
         if s == p:
             return True
-        elif s == '':
+        elif p == '':
             return False
-        p += '!'
-        p = p.split('*')
-        length = len(s)
-        piece = len(p)
-        j = 0
-        for sub in range(piece):
-            for i in range(len(p[sub]) - 1):
-                if (j == length) or (s[j] != p[sub][i] and p[sub][i] != '.'):
-                    return False
-                j += 1
-            while (j < length) and (p[sub][-1] == s[j] or p[sub][-1] == '.'):
-                j += 1
-            k = 0
-            while sub != piece - 1 and k < len(p[sub + 1]) and j > 0 and p[sub + 1][k] == p[sub][-1] == s[j - 1]:
-                k += 1
-                j -= 1
-        return j == length
+        else:
+            j = 0
+            for i in range(len(p)):
+                if i == len(p) - 1 or p[i + 1] != '*':
+                    if len(s) == 0 or (p[i] != s[j] and p[i] != '.'):
+                        return False
+                    else:
+                        return self.isMatch(s[j + 1:], p[i + 1:])
+                else:
+                    if self.isMatch(s[j:], p[i + 2:]):
+                        return True
+                    else:
+                        while j < len(s) and (s[j] == p[i] or p[i] == '.'):
+                            j += 1
+                            if self.isMatch(s[j:], p[i + 2:]):
+                                return True
+                        return False
+            return False
