@@ -12,12 +12,17 @@ class Solution(object):
         p += '!'
         p = p.split('*')
         length = len(s)
+        piece = len(p)
         j = 0
-        for sub in p:
-            for i in range(len(sub) - 1):
-                if (j == length) or (s[j] != sub[i] and sub[i] != '.'):
+        for sub in range(piece):
+            for i in range(len(p[sub]) - 1):
+                if (j == length) or (s[j] != p[sub][i] and p[sub][i] != '.'):
                     return False
                 j += 1
-            while (j < length) and (sub[-1] == s[j] or sub[-1] == '.'):
+            while (j < length) and (p[sub][-1] == s[j] or p[sub][-1] == '.'):
                 j += 1
+            k = 0
+            while sub != piece - 1 and k < len(p[sub + 1]) and j > 0 and p[sub + 1][k] == p[sub][-1] == s[j - 1]:
+                k += 1
+                j -= 1
         return j == length
