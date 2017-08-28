@@ -5,10 +5,8 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        if s == p:
-            return True
-        elif p == '':
-            return False
+        if p == "":
+            return s == ""
         else:
             j = 0
             for i in range(len(p)):
