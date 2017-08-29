@@ -13,7 +13,7 @@ class Solution(object):
             elif height[left] <= height[right]:
                 flag = height[left]
                 water = max(water, height[left] * (right - left))
-                right -= height[right] == height[left]
+                # right -= height[right] == height[left]
                 left += 1
             else:
                 flag = height[right]
