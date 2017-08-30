@@ -7,24 +7,9 @@ class Solution(object):
         integer = 0
         s = ' ' + s
         for i in range(1, len(s)):
-            if s[i] == 'M':
-                integer += 1000
-                integer -= 200 * (s[i - 1] == 'C')
-            elif s[i] == 'D':
-                integer += 500
-                integer -= 200 * (s[i - 1] == 'C')
-            elif s[i] == 'C':
-                integer += 100
-                integer -= 20 * (s[i - 1] == 'X')
-            elif s[i] == 'L':
-                integer += 50
-                integer -= 20 * (s[i - 1] == 'X')
-            elif s[i] == 'X':
-                integer += 10
-                integer -= 2 * (s[i - 1] == 'I')
-            elif s[i] == 'V':
-                integer += 5
-                integer -= 2 * (s[i - 1] == 'I')
-            elif s[i] == 'I':
-                integer += 1
+            integer = integer + 1000 * (s[i] == 'M') + 500 * (s[i] == 'D') + 100 * (s[i] == 'C')\
+                + 50 * (s[i] == 'L') + 10 * (s[i] == 'X') + 5 * (s[i] == 'V') + (s[i] == 'I')\
+                - 200 * (s[i - 1] == 'C' and (s[i] == 'M' or s[i] == 'D'))\
+                - 20 * (s[i - 1] == 'X' and (s[i] == 'C' or s[i] == 'L'))\
+                - 2 * (s[i - 1] == 'I' and (s[i] == 'X' or s[i] == 'V'))
         return integer
