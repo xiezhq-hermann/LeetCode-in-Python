@@ -5,11 +5,10 @@ class Solution(object):
         :rtype: int
         """
         integer = 0
-        s = ' ' + s
-        for i in range(1, len(s)):
-            integer = integer + 1000 * (s[i] == 'M') + 500 * (s[i] == 'D') + 100 * (s[i] == 'C')\
-                + 50 * (s[i] == 'L') + 10 * (s[i] == 'X') + 5 * (s[i] == 'V') + (s[i] == 'I')\
-                - 200 * (s[i - 1] == 'C' and (s[i] == 'M' or s[i] == 'D'))\
-                - 20 * (s[i - 1] == 'X' and (s[i] == 'C' or s[i] == 'L'))\
-                - 2 * (s[i - 1] == 'I' and (s[i] == 'X' or s[i] == 'V'))
+        values = {'M': 1000, 'D': 500, 'C': 100,
+                  'L': 50, 'X': 10, 'V': 5, 'I': 1}
+        left = 1000
+        for i in s:
+            integer = integer + values[i] - 2 * (left < values[i]) * left
+            left = values[i]
         return integer
