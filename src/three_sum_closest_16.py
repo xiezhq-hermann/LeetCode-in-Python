@@ -6,23 +6,25 @@ class Solution(object):
         :rtype: int
         """
         length = len(nums)
-        loss = target - (nums[0] + nums[1] + nums[2])
         nums.sort()
+        loss = target - (nums[0] + nums[1] + nums[2])
 
         i = 0
-        while i < length:
+        while i < length and ((target < 0 and nums[i] <= 0) or target > nums[i]):
             sub_target = target - nums[i]
             left = i + 1
             right = length - 1
             while left < right:
                 new_loss = sub_target - nums[left] - nums[right]
-                if abs(new_loss) < abs(loss):
-                    loss = new_loss
                 if new_loss > 0:
                     left += 1
                 elif new_loss < 0:
                     right -= 1
                 else:
                     return target
+                flag = abs(new_loss) < abs(loss)
+                loss = new_loss * (flag) + loss * (not flag)
+                # if abs(new_loss) < abs(loss):
+                #     loss = new_loss
             i += 1
         return target - loss
