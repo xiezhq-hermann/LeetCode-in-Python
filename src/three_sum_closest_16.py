@@ -10,7 +10,7 @@ class Solution(object):
         loss = target - (nums[0] + nums[1] + nums[2])
 
         i = 0
-        while i < length and ((target < 0 and nums[i] <= 0) or target > nums[i]):
+        while i < length:
             sub_target = target - nums[i]
             left = i + 1
             right = length - 1
@@ -22,9 +22,7 @@ class Solution(object):
                     right -= 1
                 else:
                     return target
-                flag = abs(new_loss) < abs(loss)
-                loss = new_loss * (flag) + loss * (not flag)
-                # if abs(new_loss) < abs(loss):
-                #     loss = new_loss
+                if abs(new_loss) < abs(loss):
+                    loss = new_loss
             i += 1
         return target - loss
