@@ -14,9 +14,9 @@ class Solution(object):
             dic_num[nums[i]] = i
 
         i = 0
-        while i < length - 3 and nums[i] <= target:
+        while i < length - 3:
             j = i + 1
-            while j < length - 2 and nums[j] <= target - nums[i]:
+            while j < length - 2:
                 end = length - 1
                 k = j + 1
                 while k < end:
