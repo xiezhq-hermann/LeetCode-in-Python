@@ -14,12 +14,13 @@ class Solution(object):
             dic_num[nums[i]] = i
 
         i = 0
-        while i < length - 3 and sum(nums[i:i + 4]) <= target:
+        end = length
+        while i < end - 3 and (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3]) <= target:
             j = i + 1
-            while j < length - 2 and sum(nums[j:j + 3]) <= target - nums[i]:
-                end = length - 1
+            while j < end - 2  and (nums[j] + nums[j + 1] + nums[j + 2] <= target - nums[i]):
+                end = length
                 k = j + 1
-                while k < end:
+                while k < end - 1:
                     reside = target - nums[i] - nums[j] - nums[k]
                     if reside in dic_num and dic_num[reside] > k:
                         solution.append([nums[i], nums[j], nums[k], reside])
