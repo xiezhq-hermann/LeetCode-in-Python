@@ -12,16 +12,12 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        pre = ListNode(0)
-        pre.next = head
-        point_remove = ListNode(0)
-        point_remove.next = pre
-        point_head = ListNode(0)
-        point_head.next = head
+        pre, point_remove, point_head = ListNode(0), ListNode(0), ListNode(0)
+        pre.next, point_remove.next, point_head.next = head, pre, head
         for i in range(n - 1):
-            point_head.next = point_head.next.next
+            point_head = point_head.next
         while point_head.next.next:
-            point_head.next = point_head.next.next
+            point_head = point_head.next
             point_remove = point_remove.next
         point_remove.next.next = point_remove.next.next.next
         return pre.next
