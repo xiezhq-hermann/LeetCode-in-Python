@@ -19,23 +19,23 @@ class Solution(object):
             interval *= 2
         return lists[0] if amount > 0 else lists
 
-    def merge2Lists(self, list1, list2):
-        if not list2:
-            return list1
-
+    def merge2Lists(self, l1, l2):
         head, point = ListNode(0), ListNode(0)
-        head.next = list1
-        point.next = head
-        while list1 and list2:
-            if list1.val <= list2.val:
-                point.next = list1
-                list1 = list1.next
+        head.next = point
+        while l1 and l2:
+            if l1.val <= l2.val:
+                point.next = l1
+                l1 = l1.next
             else:
-                point.next.next = list2
-                list2 = list1
-                list1 = point.next.next
-        point.next.next = list2
-        return head.next
+                point.next = l2
+                l2 = l1
+                l1 = point.next.next
+            point = point.next
+        if not l1:
+            point.next=l2
+        else:
+            point.next=l1
+        return head.next.next
 
     # def merge2Lists_recur(self, list1, list2):
     #     if not list1:
