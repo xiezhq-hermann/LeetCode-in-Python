@@ -14,20 +14,38 @@ class Solution(object):
         amount = len(lists)
         interval = 1
         while interval < amount:
-            for i in range(0, max(1, amount - amount % (interval * 2)), interval * 2):
+            for i in range(0, amount - interval, interval * 2):
                 lists[i] = self.merge2Lists(lists[i], lists[i + interval])
             interval *= 2
         return lists[0] if amount > 0 else lists
 
     def merge2Lists(self, list1, list2):
-        if not list1:
-            return list2
         if not list2:
-            return list2
-
-        if list1.val <= list2.val:
-            list1.next = self.merge2Lists(list1.next, list2)
             return list1
-        else:
-            list2.next = self.merge2Lists(list2.next, list1)
-            return list2
+
+        head, point = ListNode(0), ListNode(0)
+        head.next = list1
+        point.next = head
+        while list1 and list2:
+            if list1.val <= list2.val:
+                point.next = list1
+                list1 = list1.next
+            else:
+                point.next.next = list2
+                list2 = list1
+                list1 = point.next.next
+        point.next.next = list2
+        return head.next
+
+    # def merge2Lists_recur(self, list1, list2):
+    #     if not list1:
+    #         return list2
+    #     if not list2:
+    #         return list1
+    #
+    #     if list1.val <= list2.val:
+    #         list1.next = self.merge2Lists(list1.next, list2)
+    #         return list1
+    #     else:
+    #         list2.next = self.merge2Lists(list2.next, list1)
+    #         return list2
