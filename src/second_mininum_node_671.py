@@ -28,11 +28,11 @@ class Solution(object):
                 return root.right.val
             elif root.val == root.right.val < root.left.val:
                 minimum = self.findSecondMinimumValue(root.right)
-                return min(minimum,root.left.val) if minimum != -1 else root.left.val
+                return min(minimum, root.left.val) if minimum != -1 else root.left.val
             elif root.val == root.left.val < root.right.val:
                 minimum = self.findSecondMinimumValue(root.left)
-                return min(minimum,root.right.val) if minimum != -1 else root.right.val
+                return min(minimum, root.right.val) if minimum != -1 else root.right.val
             else:
-                minimum = min(self.findSecondMinimumValue(root.left), self.findSecondMinimumValue(root.right))
-                return minimum if minimum != -1 else max(self.findSecondMinimumValue(root.left), self.findSecondMinimumValue(root.right))
+                left, right = self.findSecondMinimumValue(root.left), self.findSecondMinimumValue(root.right)
+                return min(left, right) if min(left, right) != -1 else max(left, right)
         return minimum
