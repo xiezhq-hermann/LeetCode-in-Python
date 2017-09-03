@@ -49,3 +49,23 @@ class Solution(object):
     #     else:
     #         list2.next = self.merge2Lists(list2.next, list1)
     #         return list2
+
+# from Queue import PriorityQueue
+#
+# class Solution(object):
+#     def mergeKLists(self, lists):
+#         """
+#         :type lists: List[ListNode]
+#         :rtype: ListNode
+#         """
+#         dummy = tail = ListNode(None)
+#         q = PriorityQueue()
+#         for li in lists:
+#             if li: q.put((li.val, li))
+#         while not q.empty():
+#             val, node = q.get()
+#             tail.next = ListNode(val)
+#             tail = tail.next
+#             node = node.next
+#             if node: q.put((node.val, node))
+#         return dummy.next
