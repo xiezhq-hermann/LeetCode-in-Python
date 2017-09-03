@@ -50,6 +50,26 @@ class Solution(object):
     #         list2.next = self.merge2Lists(list2.next, list1)
     #         return list2
 
+# def mergeKLists(self, lists):
+#     """
+#     :type lists: List[ListNode]
+#     :rtype: ListNode
+#     """
+#     self.nodes = []
+#     head, point = ListNode(0), ListNode(0)
+#     head.next = point
+#
+#     for l in lists:
+#         while l:
+#             self.nodes.append(l.val)
+#             l = l.next
+#
+#     for x in sorted(self.nodes):
+#         point.next = ListNode(x)
+#         point = point.next
+#
+#     return head.next.next
+
 # from Queue import PriorityQueue
 #
 # class Solution(object):
@@ -58,14 +78,17 @@ class Solution(object):
 #         :type lists: List[ListNode]
 #         :rtype: ListNode
 #         """
-#         dummy = tail = ListNode(None)
+#         head, point = ListNode(0), ListNode(0)
+#         head.next = point
 #         q = PriorityQueue()
-#         for li in lists:
-#             if li: q.put((li.val, li))
+#         for l in lists:
+#             if l:
+#                 q.put((l.val, l))
 #         while not q.empty():
 #             val, node = q.get()
-#             tail.next = ListNode(val)
-#             tail = tail.next
+#             point.next = ListNode(val)
+#             point = point.next
 #             node = node.next
-#             if node: q.put((node.val, node))
-#         return dummy.next
+#             if node:
+#                 q.put((node.val, node))
+#         return head.next.next
