@@ -1,3 +1,6 @@
+[comment]: <> (Editorial solution writed by Zhiqiang Xie for LeetCode)
+[comment]: <> (Here is the original address: https://discuss.leetcode.com/topic/102152/solution-by-hermann0)
+[comment]: <> (xiezhq@shanghaitech.edu.cn)
 ### Approach #1 Brute Force [Accepted]
 
 **Intuition & Algorithm**
