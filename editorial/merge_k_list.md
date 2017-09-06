@@ -55,7 +55,8 @@ class Solution(object):
 
 - Compare every k nodes (head of every linked list) and get the node with the smallest value.
 - Extend the final sorted linked list with seleted nodes.
-![Comparison Method](LeetCode-in-Python/editorial/images/ezgif.com-video-to-gif.gif)
+![Comparison Method](https://raw.githubusercontent.com/xiezhq-hermann/LeetCode-in-Python/master/editorial/images/ezgif.com-video-to-gif.gif)
+
 **Complexity Analysis**
 
 - Time complexity : $O(kN)$ where k is the number of linked lists.
@@ -143,7 +144,7 @@ This approach walk alongside the one above but improved a lot. We don't need to 
   -  Repeat this procedure until we get the final sorted linked list.
 
 Thus, we'll traverse almost N nodes per pairing and merging, and repeat this procedure about $\log_{2}{k}$  times.
-![Divide and Conquer](LeetCode-in-Python/editorial/images/leetcode.jpg)
+![Divide and Conquer](https://raw.githubusercontent.com/xiezhq-hermann/LeetCode-in-Python/master/editorial/images/leetcode.jpg)
 
 
 **Python**
