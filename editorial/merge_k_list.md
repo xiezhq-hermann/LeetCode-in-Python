@@ -14,25 +14,25 @@ As for sorting, you can refer [here](https://www.cs.cmu.edu/~adamchik/15-121/lec
 **Python**
 
 ```python
-def mergeKLists(self, lists):
-    """
-    :type lists: List[ListNode]
-    :rtype: ListNode
-    """
-    self.nodes = []
-    head, point = ListNode(0), ListNode(0)
-    head.next = point
+class Solution(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        self.nodes = []
+        head = point = ListNode(0)
 
-    for l in lists:
-        while l:
-            self.nodes.append(l.val)
-            l = l.next
+        for l in lists:
+            while l:
+                self.nodes.append(l.val)
+                l = l.next
 
-    for x in sorted(self.nodes):
-        point.next = ListNode(x)
-        point = point.next
+        for x in sorted(self.nodes):
+            point.next = ListNode(x)
+            point = point.next
 
-    return head.next.next
+        return head.next
 ```
 
 **Complexity Analysis**
@@ -55,7 +55,7 @@ def mergeKLists(self, lists):
 
 - Compare every k nodes (head of every linked list) and get the node with the smallest value.
 - Extend the final sorted linked list with seleted nodes.
-
+![Comparison Method](LeetCode-in-Python/editorial/images/ezgif.com-video-to-gif.gif)
 **Complexity Analysis**
 
 - Time complexity : $O(kN)$ where k is the number of linked lists.
@@ -86,8 +86,7 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-        head, point = ListNode(0), ListNode(0)
-        head.next = point
+        head = point = ListNode(0)
         q = PriorityQueue()
         for l in lists:
             if l:
@@ -99,7 +98,7 @@ class Solution(object):
             node = node.next
             if node:
                 q.put((node.val, node))
-        return head.next.next
+        return head.next
 ```
 
 **Complexity Analysis**
@@ -120,6 +119,7 @@ class Solution(object):
 **Algorithm**
 
 Convert merge k lists problem to merge 2 lists (k-1) times. Here is the [merge 2 lists](https://leetcode.com/problems/merge-two-sorted-lists/description/) problem page.
+
 
 **Complexity Analysis**
 
@@ -143,6 +143,8 @@ This approach walk alongside the one above but improved a lot. We don't need to 
   -  Repeat this procedure until we get the final sorted linked list.
 
 Thus, we'll traverse almost N nodes per pairing and merging, and repeat this procedure about $\log_{2}{k}$  times.
+![Divide and Conquer](LeetCode-in-Python/editorial/images/leetcode.jpg)
+
 
 **Python**
 
@@ -162,8 +164,7 @@ class Solution(object):
         return lists[0] if amount > 0 else lists
 
     def merge2Lists(self, l1, l2):
-        head, point = ListNode(0), ListNode(0)
-        head.next = point
+        head = point = ListNode(0)
         while l1 and l2:
             if l1.val <= l2.val:
                 point.next = l1
@@ -177,7 +178,7 @@ class Solution(object):
             point.next=l2
         else:
             point.next=l1
-        return head.next.next
+        return head.next
 ```
 **Complexity Analysis**
 
