@@ -6,6 +6,10 @@ __pycache__/
 # file for test
 test.py
 
+#editorial solution source code
+editorial/*.md
+
+
 # C extensions
 *.so
 
