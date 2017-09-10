@@ -20,23 +20,12 @@ class MagicDictionary(object):
         :type word: str
         :rtype: bool
         """
-        def checkOne(word, member):
-            length = len(word)
-            if len(member) != length:
-                return False
-            flag = False
-            for i in range(length):
-                if word[i] != member[i]:
-                    if flag:
-                        return False
-                    flag = True
-            return flag
-
-        for member in self.set:
-            if checkOne(word, member):
-                return True
+        chars = [chr(i + 97) for i in range(26)]
+        for i, char in enumerate(word):
+            for j in chars:
+                if j != char and (word[:i] + j + word[i + 1:]) in self.set:
+                    return True
         return False
-
 
 # Your MagicDictionary object will be instantiated and called as such:
 # obj = MagicDictionary()
