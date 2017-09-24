@@ -4,12 +4,14 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        if n <= 2:
-            return 0
+        primes = [1] * n
+        count = n - 2
 
-        count = 1
-        for i in range(3,n):
-            ceil = int(i**0.5) + 1
-            if all(i % j !=0 for j in range(2, ceil)):
-                count += 1
-        return count
+        for i in range(2, int(n**0.5) + 1):
+            if primes[i]:
+                for j in range(i * i, n, i):
+                    if primes[j]:
+                        count -= 1
+                    primes[j] = 0
+
+        return max(count, 0)
