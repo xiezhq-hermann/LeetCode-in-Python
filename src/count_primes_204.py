@@ -10,7 +10,6 @@ class Solution(object):
 
         for i in range(2, int(n**0.5) + 1):
             if primes[i]:
-                for j in range(i * i, n, i):
-                    primes[j] = 0
+                primes[i*i:n:i] = [0] * len(primes[i*i:n:i])
 
         return sum(primes) - 2
