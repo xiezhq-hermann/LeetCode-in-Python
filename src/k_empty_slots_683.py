@@ -5,24 +5,36 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        bloom = [flowers[0]]
-        num_bloom = 1
-        for slot in flowers[1:]:
-            left = 0
-            for x in range(num_bloom):
-                if bloom[x] > slot:
-                    if bloom[x] - slot == k + 1:
-                        return num_bloom + 1
-                    elif left and slot - left == k + 1:
-                        return num_bloom + 1
-                    else:
-                        bloom.insert(x, slot)
+        residue = num_slot = len(flowers)
+        bloom = [0] * (num_slot + 1)
+        days = 0
+
+        while residue > k:
+            slot = flowers[days]
+            days += 1
+            if bloom[slot]:
+                continue
+
+            bloom[slot] = 1
+            left, right = slot - k - 1, slot + k + 1
+            residue -= 1
+
+            if left > 0 and bloom[left]:
+                for i in range(left + 1, slot):
+                    if bloom[i]:
                         break
+                    bloom[i] = 1
+                    residue -= 1
                 else:
-                    left = bloom[x]
-            else:
-                if left and slot - left == k + 1:
-                    return num_bloom + 1
-                bloom.insert(num_bloom, slot)
-            num_bloom += 1
+                    return days
+
+            if right <= num_slot and bloom[right]:
+                for i in range(slot + 1, right):
+                    if bloom[i]:
+                        break
+                    bloom[i] = 1
+                    residue -= 1
+                else:
+                    return days
+
         return -1
