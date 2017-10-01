@@ -6,13 +6,12 @@ class Solution(object):
         """
         token_stack = []
         for t in ops:
-            if t not in ['D', 'C', '+']:
-                token_stack.append(int(t))
+            if t == 'D':
+                token_stack.append(token_stack[-1] * 2)
+            elif t == 'C':
+                token_stack.pop()
+            elif t == '+':
+                token_stack.append(sum(token_stack[-2:]))
             else:
-                if t == 'D':
-                    token_stack.append(token_stack[-1] * 2)
-                elif t == 'C':
-                    token_stack.pop()
-                else:
-                    token_stack.append(sum(token_stack[-2:]))
+                token_stack.append(int(t))
         return sum(token_stack)
