@@ -11,17 +11,14 @@ class Solution(object):
             else:
                 r, l = token_stack.pop(), token_stack.pop()
                 if t == "+":
-                    token_stack.append(l+r)
+                    token_stack.append(l + r)
                 elif t == "-":
-                    token_stack.append(l-r)
+                    token_stack.append(l - r)
                 elif t == "*":
-                    token_stack.append(l*r)
+                    token_stack.append(l * r)
                 else:
-                    if r == 0:
-                        raise ZeroDivisionError("integer division by zero")
+                    if l * r < 0 and l % r != 0:
+                        token_stack.append(l / r + 1)
                     else:
-                        if l*r < 0 and l % r != 0:
-                            token_stack.append(l/r+1)
-                        else:
-                            token_stack.append(l/r)
+                        token_stack.append(l / r)
         return token_stack.pop()
