@@ -5,13 +5,9 @@ class Solution(object):
         :type B: str
         :rtype: int
         """
-        set_a, set_b = set(A), set(B)
-        if set_b > set_a:
-            return -1
-
-        for i in range(1, 10000//len(A) + 1):
-            multiply = A*i
-            if B in multiply:
+        base = (len(B)-1)//len(A) + 1
+        for i in range(base, base+2):
+            if B in A*i:
                 return i
         else:
             return -1
