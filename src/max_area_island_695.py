@@ -8,27 +8,15 @@ class Solution(object):
             return 0
         x_len, y_len = len(grid), len(grid[0])
 
-        def check_next(x, y):
-            next_valid = 0
-            if x - 1 >= 0 and grid[x - 1][y]:
-                grid[x - 1][y] = 0
-                next_valid += 1 + check_next(x - 1, y)
-            if x + 1 < x_len and grid[x + 1][y]:
-                grid[x + 1][y] = 0
-                next_valid += 1 + check_next(x + 1, y)
-            if y - 1 >= 0 and grid[x][y - 1]:
-                grid[x][y - 1] = 0
-                next_valid += 1 + check_next(x, y - 1)
-            if y + 1 < y_len and grid[x][y + 1]:
-                grid[x][y + 1] = 0
-                next_valid += 1 + check_next(x, y + 1)
-            return next_valid
+        def check_neighbor(x, y):
+            if 0 <= x < x_len and 0 <= y < y_len and grid[x][y]:
+                grid[x][y] = 0
+                return 1 + sum([check_neighbor(x + i, y + j) for i, j in [(-1, 0), (1, 0), (0, -1), (0, 1)]])
+            return 0
 
         max_island = 0
-        for i in range(x_len):
-            for j in range(y_len):
-                if grid[i][j]:
-                    grid[i][j] = 0
-                    max_island = max(1 + check_next(i, j), max_island)
+        for x in range(x_len):
+            for y in range(y_len):
+                max_island = max(check_neighbor(x, y), max_island)
 
         return max_island
