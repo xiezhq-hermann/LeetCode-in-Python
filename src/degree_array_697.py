@@ -4,20 +4,18 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        from collections import Counter
-        counts = Counter(nums).most_common()
-        i = 0
-        num_len = smallest = len(nums)
-        while i < len(counts) and counts[i][1] == counts[0][1]:
-            element, fre = counts[i]
-            flag = -1
-            for j in range(num_len):
-                if nums[j] == element:
-                    if flag == -1:
-                        flag = j
-                    fre -= 1
-                    if fre == 0:
-                        smallest = min(j+1 - flag, smallest)
-                        break
-            i += 1
+        num_dic = {}
+        for i in range(len(nums)):
+            if nums[i] in num_dic:
+                num_dic[nums[i]][0][1] = i
+                num_dic[nums[i]][1] += 1
+            else:
+                num_dic[nums[i]] = [[i, i], 1]
+        smallest = fre = 0
+        for info in num_dic.values():
+            if info[1] > fre:
+                fre = info[1]
+                smallest = info[0][1] - info[0][0] + 1
+            elif info[1] == fre:
+                smallest = min(info[0][1] - info[0][0] + 1, smallest)
         return smallest
